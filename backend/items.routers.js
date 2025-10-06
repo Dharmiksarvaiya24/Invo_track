@@ -1,44 +1,96 @@
-import express from 'express'
-import Item from './item.models.js'
+import express from 'express';
+import Item from './item.models.js';
 
-const router = express.Router()
+const router = express.Router();
 
 // Get all items
 router.get('/', async (req, res) => {
   try {
-    const items = await Item.find().sort({ createdAt: -1 })
-    res.json(items)
+    const items = await Item.find().sort({ createdAt: -1 });
+    res.json(items);
   } catch (err) {
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: 'Server error' });
   }
-})
+});
 
 // Add new item
 router.post('/', async (req, res) => {
-  const { itemName, itemPrice } = req.body
+  const { itemName, itemPrice } = req.body;
 
   if (!itemName || itemPrice == null) {
-    return res.status(400).json({ message: 'All fields are required' })
+    return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    const newItem = new Item({ itemName, itemPrice })
-    const saved = await newItem.save()
-    res.status(201).json(saved)
+    const newItem = new Item({ itemName, itemPrice });
+    const saved = await newItem.save();
+    res.status(201).json(saved);
   } catch (err) {
-    res.status(500).json({ message: 'Failed to save item' })
+    res.status(500).json({ message: 'Failed to save item' });
   }
-})
+});
 
 // Delete item
 router.delete('/:id', async (req, res) => {
   try {
-    const deleted = await Item.findByIdAndDelete(req.params.id)
-    if (!deleted) return res.status(404).json({ message: 'Item not found' })
-    res.json({ message: 'Item deleted successfully' })
+    const deleted = await Item.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: 'Item not found' });
+    res.json({ message: 'Item deleted successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Failed to delete item' })
+    res.status(500).json({ message: 'Failed to delete item' });
   }
-})
+});
 
-export default router
+// Update item quantity
+router.patch('/:id/quantity', async (req, res) => {
+  const { quantity } = req.body;
+  if (quantity == null || quantity < 0) {
+    return res.status(400).json({ message: 'Invalid quantity' });
+  }
+
+  try {
+    const updated = await Item.findByIdAndUpdate(
+      req.params.id,
+      { quantity },
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ message: 'Item not found' });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update quantity' });
+  }
+});
+
+// Update item description
+router.patch('/:id/description', async (req, res) => {
+  const { description } = req.body;
+
+  try {
+    const updated = await Item.findByIdAndUpdate(
+      req.params.id,
+      { description },
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ message: 'Item not found' });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update description' });
+  }
+});
+
+// Get items with low stock
+router.get('/low-stock/:threshold', async (req, res) => {
+  const threshold = parseInt(req.params.threshold);
+  if (isNaN(threshold)) {
+    return res.status(400).json({ message: 'Invalid threshold' });
+  }
+
+  try {
+    const items = await Item.find({ quantity: { $lte: threshold } }).sort({ quantity: 1 });
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch low stock items' });
+  }
+});
+
+export default router;

@@ -10,7 +10,7 @@
             alt="Junco Logo"
             class="logo"
           />
-          <span class="brand-text">Junco Billing</span>
+          <span class="brand-text">Junco Billing & Inventery</span>
         </div>
 
         <!-- Settings Button -->
