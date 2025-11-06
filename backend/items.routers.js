@@ -61,36 +61,5 @@ router.patch('/:id/quantity', async (req, res) => {
   }
 });
 
-// Update item description
-router.patch('/:id/description', async (req, res) => {
-  const { description } = req.body;
-
-  try {
-    const updated = await Item.findByIdAndUpdate(
-      req.params.id,
-      { description },
-      { new: true }
-    );
-    if (!updated) return res.status(404).json({ message: 'Item not found' });
-    res.json(updated);
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to update description' });
-  }
-});
-
-// Get items with low stock
-router.get('/low-stock/:threshold', async (req, res) => {
-  const threshold = parseInt(req.params.threshold);
-  if (isNaN(threshold)) {
-    return res.status(400).json({ message: 'Invalid threshold' });
-  }
-
-  try {
-    const items = await Item.find({ quantity: { $lte: threshold } }).sort({ quantity: 1 });
-    res.json(items);
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to fetch low stock items' });
-  }
-});
 
 export default router;

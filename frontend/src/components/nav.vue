@@ -5,12 +5,8 @@
       <div class="navbar-container">
         <!-- Logo and Brand -->
         <div class="navbar-brand">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-RdjPwdcxnD3A6uSfSXlOYItwaY7Hed.png"
-            alt="Junco Logo"
-            class="logo"
-          />
-          <span class="brand-text">Junco Billing & Inventery</span>
+          
+          <span class="brand-text">InvoTrack</span>
         </div>
 
         <!-- Settings Button -->
@@ -346,7 +342,7 @@ const router = useRouter();
 const route = useRoute();
 
 // api url
-const API_BASE_URL = "http://localhost:5000/api/items";
+const API_BASE_URL = "http://localhost:5001/api/items";
 
 const injectedGlobalState = inject("globalState", null);
 const globalState = ref({
