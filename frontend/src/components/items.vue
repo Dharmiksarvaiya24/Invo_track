@@ -67,7 +67,7 @@ import { ref, onMounted, watch, nextTick, inject, provide } from 'vue'
 import Cart from './cart.vue'
 
 // API Base URL
-const API_BASE_URL = 'http://localhost:5000/api/items'
+const API_BASE_URL = 'http://localhost:5001/api/items'
 
 const globalState = inject('globalState', null) || ref({
   items: [],
@@ -359,7 +359,7 @@ onMounted(() => {
   overflow: hidden;
 }
 
-.item-card::before {
+.item-card::before {  
   content: '';
   position: absolute;
   top: 0;

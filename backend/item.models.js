@@ -1,5 +1,4 @@
-
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const itemSchema = new mongoose.Schema({
   itemName: {
@@ -12,10 +11,15 @@ const itemSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-})
 
-export default mongoose.model('Item', itemSchema)
+
+  quantity: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
+  
+ 
+});
+
+export default mongoose.model('Item', itemSchema);

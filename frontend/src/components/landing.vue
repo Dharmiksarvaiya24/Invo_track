@@ -33,11 +33,11 @@ import cart from './cart.vue';
 }
 
 .navbar {
-  position: sticky; /* or fixed */
+  position: sticky; 
   top: 0;
   z-index: 10;
   background: white;
-  height: 60px; /* set navbar height */
+  height: 60px; 
   display: flex;
   align-items: center;
 }
@@ -45,6 +45,6 @@ import cart from './cart.vue';
 .content {
   flex: 1;
   padding: 1rem;
-  margin-top: 60px; /* push content below navbar */
+  margin-top: 60px; 
 }
 </style>
