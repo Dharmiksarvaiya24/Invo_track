@@ -100,7 +100,7 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  restaurantName: { type: String, default: 'My Restaurant' },
+  restaurantName: { type: String, default: 'Shop Name' },
   restaurantAddress: { type: String, default: '123 Main Street, City' },
   restaurantPhone: { type: String, default: '' },
   gstNumber: { type: String, default: '' },

@@ -115,7 +115,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Category</label>
-                <input v-model="formData.category" type="text" placeholder="e.g., Electronics" />
+                <input v-model="formData.category" type="text" placeholder="" />
               </div>
               <div class="form-group">
                 <label>Low Stock Alert</label>
@@ -283,10 +283,10 @@ onMounted(() => {
   color: #263238;
 }
 
-/* ✅ Added padding and margin to push content below Navbar */
+
 .inventory-container {
   padding: 2rem;
-  margin-top: 80px; /* Adjust based on navbar height */
+  margin-top: 80px;
 }
 
 .header {
@@ -701,7 +701,7 @@ onMounted(() => {
   transform: translateY(10px);
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .header {
     flex-direction: column;

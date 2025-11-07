@@ -27,7 +27,7 @@
         <div class="feature-card">
           <div class="feature-badge">2</div>
           <h3 class="feature-title">Inventory Control</h3>
-          <p class="feature-text">Monitor stock levels and automate reordering</p>
+          <p class="feature-text">Monitor stock levels </p>
         </div>
 
         <!-- Feature 3 -->
